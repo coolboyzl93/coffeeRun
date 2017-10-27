@@ -1,0 +1,11 @@
+{
+  "name": "coffeeRun",
+  "version": "1.0.0",
+  "description": "second project",
+  "main": "index.js",
+  "author": "Ray",
+  "license": "MIT",
+  "scripts": {
+    "view": "browser-sync start --server --files \"*.html, stylesheets/*.css, js/*.js\" "
+  }
+}

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <style>
+    form :focus:required:invalid {
+      border-color: #a94442
+    }
+  </style>
+  <title>Document</title>
+</head>
+
+<body class="container">
+  <header>
+    <h1>CoffeeRun</h1>
+  </header>
+  <section>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <form data-coffee-order="form" action="" role="form">
+          <!-- 输入用户订单-input(text)  -->
+          <div class="form-group">
+            <label for="coffeeOrder">说点什么</label>
+            <input type="text" class="form-control" name="coffee" id="coffeeOrder" placeholder="选择超大杯+80%以上有惊喜！" autofocus required>
+          </div>
+          <!-- 输入用户邮箱-input(email) -->
+          <div class="form-group">
+            <label for="emailIput">手机号码</label>
+            <input type="email" class="form-control" name="emailAddress" id="emailInput" value="" placeholder="任何 Gmail" required>
+          </div>
+          <!-- 选择杯型-单选框input(radio) -->
+          <div class="form-group">
+            <div class="radio">
+              <label for="">
+                <input type="radio" name="size" value="小杯"> 小杯
+              </label>
+            </div>
+            <div class="radio">
+              <label for="">
+                <input type="radio" name="size" value="中杯" checked> 中杯
+              </label>
+            </div>
+            <div class="radio">
+              <label for="">
+                <input type="radio" name="size" value="大杯"> 大杯
+              </label>
+            </div>
+            <div class="radio">
+              <label for="">
+                <input type="radio" name="size" value="超大杯"> 超大杯
+              </label>
+            </div>
+          </div>
+          <!-- 口味选项-下拉列表selection -->
+          <div class="form-group">
+            <label for="flavorShot">选择口味</label>
+            <select name="flavor" id="flavorShot" class="form-control">
+              <option value="">正常口味</option>
+              <option value="caramel">焦糖味</option>
+              <option value="almond">杏仁味</option>
+              <option value="mocha">摩卡味</option>
+            </select>
+          </div>
+          <!-- 咖啡浓度自定义-范围滑块input(range)-->
+          <div class="form-group">
+            <label for="strengthLevel">咖啡因含量百分比
+              <span data-coffein-rating="number" style="color:#FCB63C">30</span>
+            </label>
+            <input type="range" name="strength" id="strengthLevel" value="30">
+          </div>
+          <!-- 提交按钮 bootstrap -->
+          <button type="submit" class="btn btn-default">Submit</button>
+          <!-- 重置按钮 bootstrap -->
+          <button type="reset" class="btn btn-default">Reset</button>
+        </form>
+      </div>
+    </div>
+  </section>
+  <!-- 模态框1 -->
+  <div class="modal fade" id="highCoffeinAlert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            &times; </button>
+          <h4 class="modal-title text-center" id="myModalLabel">解锁成就：你很重口味！</h4>
+        </div>
+        <div class="modal-body">
+          <h3>你确定要选择这种浓度的咖啡吗？</h3>
+          <p style="font-size:20px">
+            <span>当前咖啡因浓度</span>&nbsp
+            <span data-coffein-rating="high" style="color:red"></span>
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">重新选择</button>
+          <!-- 按钮触发模态框 -->
+          <button class="btn btn-primary" data-toggle="modal" data-dismiss="modal" data-target="#highCoffeinCustom">确定</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal -->
+  </div>
+  <!-- 模态框2 -->
+  <div class="modal fade" id="highCoffeinCustom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            &times; </button>
+          <h4 class="modal-title text-center" id="myModalLabel">成就奖励！选择特殊咖啡类型</h4>
+        </div>
+        <div class="modal-body">
+          <div class="radio">
+            <label for="">
+              <input type="radio" name="reward" value="Time"> 打发时间型咖啡
+            </label>
+          </div>
+          <div class="radio">
+            <label for="">
+              <input type="radio" name="reward" value="Read" checked> 心灵阅读型咖啡
+            </label>
+          </div>
+          <div class="radio">
+            <label for="">
+              <input type="radio" name="reward" value="solve"> 解决问题型咖啡
+            </label>
+          </div>
+          <div class="radio">
+            <label for="">
+              <input type="radio" name="reward" value="code"> 码农咖啡
+            </label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="highSubmit" type="botton" class="btn btn-primary" data-dismiss="modal">确定</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal -->
+  </div>
+  <!-- CheckList -->
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h4>正在处理的订单:</h4>
+      <p>友情提示: 貌似这个RESTful web服务器是个公共的接口，所以别删掉别人写的的订单</p>
+      <div data-coffee-order="checklist">
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdn.bootcss.com/webshim/1.16.0/dev/polyfiller.js"></script>
+  <script src="js/validation.js"></script>
+  <script src="js/checkList.js"></script>
+  <script src="js/formHandler.js"></script>
+  <script src="js/remotedatastore.js"></script>
+  <script src="js/datastore.js"></script>
+  <script src="js/truck.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>
