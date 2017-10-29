@@ -20,6 +20,24 @@
 - 全局npm包: ```npm install -g browser-sync standard```
 - scripts终端命令: ```npm run view``` 
 ---
+## 项目结构
+**本项目的模块构成**
+
+实际上一共是5个模块，main.js是中央总线，观察main.js中的程序就可以很清晰地看到各个模块的相互运作方式,以及依赖关系。
+![](img/project_structure.png)
+- formHandler.js负责处理表单的数据，他是直接被main.js调用的
+- validation.js验证表单，它仅仅为formHandler.js服务
+- truck.js是面向formHandler.js和checkList.js的，formHandler向它传入数据，而checkList向它索取数据，或者命令它删除数据。
+- dataStore.js 是基本的数据库，它仅仅对数据的增加，删除，获取提供方法，其他的根本不管，它只被truck.js灵活调用
+- checkList.js 是动态的DOM表单
+- 最后main.js作为中央总线，让各个模块各司其职。
+
+**模块化的好处**
+
+正如图中所看到的那样，单纯的truck.js和dataStore.js是单线依赖，所以其实它们两个是可以合在一起写的，但是如果想要扩展程序的功能，模块化编程是非常方便的，因为我可以复用一些提供基础功能的模块，然后将他们的功能包装起来，变得更具体，更针对某些服务。在出现错误的时候，代码的结构清晰，很快就能定位错误。代码的易用性，复用性，扩展性都很好。
+
+值得一提的是，虽然模块的依赖关系是如图所示，但是因为ES5没有模块化的概念，所以只能用LIFE进行模拟，但所有的模块还都得引入main.js中。在ES6+中，使用import 引入模块的方式就根本没必要将不存在直接依赖关系的文件引入，比如main.js中就只需要引入formHandler.js 和 checkList.js就好了。而且最后导入HTML中，只需要导入main.js而不需要其他的js文件。
+
 
 学到的内容
 ## html 
@@ -67,20 +85,9 @@
 
 15. 对于构造函数的理解: 构造函数new出来的对象都是富人家的孩子，他们天生具有他们家族的属性，相比之下，字面量定义出的对象都是穷人家的孩子，它们所有的属性都得后天自己创造。所以，当很多对象归属于某一家族的时候，也就是他们有很多共性的时候，应该使用构造函数去创造对象，这样可以减少代码的数量。而如果想弄一些数量不多而且个个特立独行的对象，就不必使用构造函数了。
 
-16. **本项目的模块构成**：实际上一共是5个模块，main.js是中央总线，观察main.js中的程序就可以很清晰地看到各个模块的相互运作方式,以及依赖关系。
-![](img/coffeeRun.png)
-- formHandler.js负责处理表单的数据，他是直接被main.js调用的
-- validation.js验证表单，它仅仅为formHandler.js服务
-- truck.js是面向formHandler.js和checkList.js的，formHandler向它传入数据，而checkList向它索取数据，或者命令它删除数据。
-- dataStore.js 是基本的数据库，它仅仅对数据的增加，删除，获取提供方法，其他的根本不管，它只被truck.js灵活调用
-- checkList.js 是动态的DOM表单
-- 最后main.js作为中央总线，让各个模块各司其职。
-
-值得一提的是，虽然模块的依赖关系是如图所示，但是因为ES5没有模块化的概念，所以只能用LIFE进行模拟，但所有的模块还都得引入main.js中。在ES6+中，使用import 引入模块的方式就根本没必要将不存在直接依赖关系的文件引入，比如main.js中就只需要引入formHandler.js 和 checkList.js就好了。而且最后导入HTML中，只需要导入main.js而不需要其他的js文件。
-
 
 ## 函数库
-1. 引用webshim进行表单的验证，它的优点是能支持Safari浏览器的表单校验，它依赖jQuery。首先将webshim的CDN引入HTML中，然后调用
+引用webshim进行表单的验证，它的优点是能支持Safari浏览器的表单校验，它依赖jQuery。首先将webshim的CDN引入HTML中，然后调用
 ```
 webshim.polyfill('forms forms-ext')
 webshim.setOptions('form',{addValidators: true, lazyCustomMessages: true})
