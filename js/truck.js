@@ -4,7 +4,7 @@
   var App = window.App || {}
 
   // 将 new App.DataStore() 作为实参传入db,它会继承DataStore 中的方法。因为它就是DataStore实例的引用
-  function Truck(truckId, db) {
+  function Truck (truckId, db) {
     this.truckId = truckId
     this.db = db
   }

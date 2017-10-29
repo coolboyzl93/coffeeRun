@@ -5,7 +5,7 @@
   var $ = window.jQuery
 
   // 表单处理构造函数， 接受一个选择器，获得一整个表单的jQuery对象
-  function FormHandler(selector) {
+  function FormHandler (selector) {
     if (!selector) {
       throw new Error('No selector provided!')
     }

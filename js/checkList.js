@@ -92,7 +92,7 @@
   CheckList.prototype.removeRow = function (email) {
     this.$element
       .find('[value="' + email + '"]')
-      .closest('[data-coffee-order="checkbox"')
+      .closest('[data-coffee-order="checkbox"') // 最接近的DOM元素来触发事件，所以是单个DOM元素
       .remove()
   }
 
