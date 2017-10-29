@@ -25,12 +25,10 @@
 
   formHandler.addSubmitHandler(function (data) {
     return myTruck.createOrder(data).then(function () {
-      console.log('main?')
       checkList.addRow(data)
     }, function () {
       window.alert('服务器没连上，再试一次')
     })
-    // checkList.addRow(data)
   })
 
   formHandler.addInputHandler(Validation.isCompanyEmail)

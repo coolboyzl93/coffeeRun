@@ -67,6 +67,18 @@
 
 15. 对于构造函数的理解: 构造函数new出来的对象都是富人家的孩子，他们天生具有他们家族的属性，相比之下，字面量定义出的对象都是穷人家的孩子，它们所有的属性都得后天自己创造。所以，当很多对象归属于某一家族的时候，也就是他们有很多共性的时候，应该使用构造函数去创造对象，这样可以减少代码的数量。而如果想弄一些数量不多而且个个特立独行的对象，就不必使用构造函数了。
 
+16. **本项目的模块构成**：实际上一共是5个模块，main.js是中央总线，观察main.js中的程序就可以很清晰地看到各个模块的相互运作方式。
+```mermaid
+graph TD
+client1-->|read / write|SVN((SVN server))
+client2-->|read only|SVN
+client3-->|read / write|SVN
+client4-->|read only|SVN
+client5(...)-->SVN
+SVN---|store the data|sharedrive
+```
+
+
 ## 函数库
 1. 引用webshim进行表单的验证，它的优点是能支持Safari浏览器的表单校验，它依赖jQuery。首先将webshim的CDN引入HTML中，然后调用
 ```
